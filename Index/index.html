@@ -33,16 +33,18 @@
     <div class="form-signin">
         <h1 class="h3 font-weight-normal mb-2">TF Bitrise yml Generator</h1>
         <label class="mt-4">Team Id</label>
-        <input type="text" id="1" class="form-control" placeholder="Team Id">
+        <input type="text" id="teamId" class="form-control" placeholder="Team Id">
         <label class="mt-4">Provision Profile Name</label>
-        <input type="text" id="3" class="form-control" placeholder="Provision Profile Name">
+        <input type="text" id="profileName" class="form-control" placeholder="Provision Profile Name">
         <label class="mt-4">Bundle Id</label>
-        <input type="text" id="2" class="form-control" placeholder="Bundle Id">
+        <input type="text" id="bundleId" class="form-control" placeholder="Bundle Id">
         <label class="mt-4">Version</label>
-        <input type="text" id="4" class="form-control" placeholder="Version">
+        <input type="text" id="version" class="form-control" placeholder="Version">
         <label class="mt-4">Build</label>
-        <input type="text" id="4" class="form-control" placeholder="Build">
+        <input type="text" id="build" class="form-control" placeholder="Build">
         <button class="btn btn-lg btn-primary btn-block mt-4" id="sendBtn">Send</button>
+        <button class="btn btn-lg btn-success btn-block mt-4" id="copyBtn">Copy</button>
+        <p class="mt-5" id="result"></p>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
