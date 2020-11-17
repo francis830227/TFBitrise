@@ -23,7 +23,7 @@ document.getElementById('sendBtn').onclick = function () {
         console.log(JSON.stringify(bodyObject));
 
         var request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:8000/yml", true);
+        request.open("POST", window.location.href + "/yml", true);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
