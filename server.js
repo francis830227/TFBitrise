@@ -50,10 +50,10 @@ app.post('/yml', function(req, res) {
         data.workflows["Lutu-Beta"].steps[5]['set-ios-product-bundle-identifier@1']["inputs"][0]["new_bundle_identifier"] = body.bundleId;
     
         //Bundle version
-        data.workflows["Lutu-Beta"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.version;
+        data.workflows["Lutu-Beta"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.build;
 
         //Bundle version short
-        data.workflows["Lutu-Beta"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.build;
+        data.workflows["Lutu-Beta"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.version;
 
         //Debug Provision-Profile Specifier
         data.workflows["Lutu-Beta"].steps[7]['code-signing-setting-patch@1']["inputs"][2]["debug_provisioning_profile_specifier"] = body.profileName;

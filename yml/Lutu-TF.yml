@@ -4,10 +4,10 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
 trigger_map:
 - pull_request_source_branch: "*"
-  workflow: Lutu-Beta
+  workflow: Lutu-TF
   pull_request_target_branch: master
 workflows:
-  Lutu-Beta:
+  Lutu-TF:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
@@ -22,8 +22,8 @@ workflows:
         - project_path: StreamVideo.xcodeproj
     - set-ios-version@2:
         inputs:
-        - bundle_version: 2.8.9
-        - bundle_version_short: '21'
+        - bundle_version: '5'
+        - bundle_version_short: 2.8.9
         - info_plist_file: StreamVideo/Launch/Info.plist
     - code-signing-setting-patch@1:
         inputs:
