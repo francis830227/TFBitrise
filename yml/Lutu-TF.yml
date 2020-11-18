@@ -18,7 +18,7 @@ workflows:
     - certificate-and-profile-installer@1: {}
     - set-ios-product-bundle-identifier@1:
         inputs:
-        - new_bundle_identifier: com.mei.cn
+        - new_bundle_identifier: com.fqqqqxxx.cn
         - project_path: StreamVideo.xcodeproj
     - set-ios-version@2:
         inputs:
@@ -29,12 +29,12 @@ workflows:
         inputs:
         - project_target: StreamVideoTF1
         - debug_code_sign_identity: Apple Development
-        - debug_provisioning_profile_specifier: Mei_AppStore
+        - debug_provisioning_profile_specifier: fqqqqxxx_AppStore
         - release_code_sign_identity: iPhone Distribution
-        - release_provisioning_profile_specifier: Mei_AppStore
+        - release_provisioning_profile_specifier: fqqqqxxx_AppStore
         - code_sign_style: Manual
-        - debug_development_team: 8SBGGL6P7Z
-        - release_development_team: 8SBGGL6P7Z
+        - debug_development_team: STMJ446U9T
+        - release_development_team: STMJ446U9T
         - xcode_xcodeproj_file: StreamVideo.xcodeproj
     - cocoapods-install@1: {}
     - xcode-archive@2:
@@ -44,6 +44,10 @@ workflows:
         - export_method: "$BITRISE_EXPORT_METHOD"
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
+    - telegram-notify@1:
+        inputs:
+        - download_url: "$BITRISE_IPA_PATH"
+        - custom_message: Lutu TF
 app:
   envs:
   - opts:
@@ -55,4 +59,3 @@ app:
   - opts:
       is_expand: false
     BITRISE_EXPORT_METHOD: app-store
-
