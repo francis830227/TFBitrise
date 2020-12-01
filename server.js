@@ -47,19 +47,19 @@ app.post('/yml', function(req, res) {
         var data = yaml.safeLoad(fileContents);
         
         //Bundle Identifier
-        data.workflows["Fulao2-TF"].steps[5]['set-ios-product-bundle-identifier@1']["inputs"][0]["new_bundle_identifier"] = body.bundleId;
+        data.workflows["primary"].steps[5]['set-ios-product-bundle-identifier@1']["inputs"][0]["new_bundle_identifier"] = body.bundleId;
     
         //Bundle version
-        data.workflows["Fulao2-TF"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.build;
+        data.workflows["primary"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.build;
 
         //Bundle version short
-        data.workflows["Fulao2-TF"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.version;
+        data.workflows["primary"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.version;
 
         //Provision-Profile Specifier
-        data.workflows["Fulao2-TF"].steps[7]['update-xcode-project-provisioning']["inputs"][0]["provisioning_profile_specifier"] = body.profileName;
+        data.workflows["primary"].steps[7]['update-xcode-project-provisioning@1']["inputs"][0]["provisioning_profile_specifier"] = body.profileName;
 
         //development team
-        data.workflows["Fulao2-TF"].steps[7]['update-xcode-project-provisioning']["inputs"][3]["development_team"] = body.teamId;
+        data.workflows["primary"].steps[7]['update-xcode-project-provisioning@1']["inputs"][3]["development_team"] = body.teamId;
 
         res.send(data);
     } catch(e) {
