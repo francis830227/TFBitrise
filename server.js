@@ -41,31 +41,25 @@ app.post('/yml', function(req, res) {
 
     try {
         var fileContents = fs.readFileSync(
-            './yml/Lutu-TF.yml',
+            './yml/Fulao2-TF.yml',
             'utf8'
         );
         var data = yaml.safeLoad(fileContents);
         
         //Bundle Identifier
-        data.workflows["Lutu-TF"].steps[5]['set-ios-product-bundle-identifier@1']["inputs"][0]["new_bundle_identifier"] = body.bundleId;
+        data.workflows["Fulao2-TF"].steps[5]['set-ios-product-bundle-identifier@1']["inputs"][0]["new_bundle_identifier"] = body.bundleId;
     
         //Bundle version
-        data.workflows["Lutu-TF"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.build;
+        data.workflows["Fulao2-TF"].steps[6]['set-ios-version@2']["inputs"][0]["bundle_version"] = body.build;
 
         //Bundle version short
-        data.workflows["Lutu-TF"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.version;
+        data.workflows["Fulao2-TF"].steps[6]['set-ios-version@2']["inputs"][1]["bundle_version_short"] = body.version;
 
-        //Debug Provision-Profile Specifier
-        data.workflows["Lutu-TF"].steps[7]['code-signing-setting-patch@1']["inputs"][2]["debug_provisioning_profile_specifier"] = body.profileName;
+        //Provision-Profile Specifier
+        data.workflows["Fulao2-TF"].steps[7]['update-xcode-project-provisioning']["inputs"][0]["provisioning_profile_specifier"] = body.profileName;
 
-        //Release Provision-Profile Specifier
-        data.workflows["Lutu-TF"].steps[7]['code-signing-setting-patch@1']["inputs"][4]["release_provisioning_profile_specifier"] = body.profileName;
-
-        //Debug development team
-        data.workflows["Lutu-TF"].steps[7]['code-signing-setting-patch@1']["inputs"][6]["debug_development_team"] = body.teamId;
-
-        //Release development team
-        data.workflows["Lutu-TF"].steps[7]['code-signing-setting-patch@1']["inputs"][7]["release_development_team"] = body.teamId;
+        //development team
+        data.workflows["Fulao2-TF"].steps[7]['update-xcode-project-provisioning']["inputs"][3]["development_team"] = body.teamId;
 
         res.send(data);
     } catch(e) {
