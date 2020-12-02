@@ -1,0 +1,75 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+trigger_map:
+- push_branch: developer
+  workflow: primary
+- pull_request_source_branch: "*"
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - cache-pull@2: {}
+    - cocoapods-install@1: {}
+    - certificate-and-profile-installer@1: {}
+    - set-ios-product-bundle-identifier@1:
+        inputs:
+        - new_bundle_identifier: com.zzdev.jiuliang
+        - project_path: Fulao2.xcodeproj
+    - set-ios-version@2:
+        inputs:
+        - bundle_version: '43'
+        - bundle_version_short: '1.0'
+        - info_plist_file: Fulao2.plist
+    - update-xcode-project-provisioning@1:
+        inputs:
+        - provisioning_profile_specifier: jiuliang_AppStore
+        - xcode_xcodeproj_file: Fulao2.xcodeproj
+        - code_sign_identity: iPhone Distribution
+        - development_team: 2956HGD3JX
+        - code_sign_style: Manual
+        - project_target: Fulao2 TF01
+    - xcode-archive@2:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - compile_bitcode: 'no'
+        - upload_bitcode: 'no'
+        - export_method: app-store
+        is_always_run: true
+    - deploy-to-bitrise-io@1: {}
+    - cache-push@2: {}
+    - slack@3:
+        inputs:
+        - webhook_url: "$SLACK_WEBHOOK_URL"
+        - from_username: Bitrise-Fulao2
+        - channel_on_error: "#fulao2"
+        - api_token: ''
+        - text_on_error: "*Build 失敗ㄌ :cold_sweat:*"
+        - from_username_on_error: Bitrise-Fulao2
+        - pretext: ''
+        - pretext_on_error: ''
+        - emoji_on_error: ":cold_sweat:"
+        - emoji: ''
+        - text: "*Build 成功！:pleading_face:*"
+        - channel: "#fulao2"
+    - telegram-notify@1:
+        inputs:
+        - telegram_bot_token: "$TELEGRAM_TOKEN"
+        - download_url: "$BITRISE_PUBLIC_INSTALL_PAGE_URL"
+        - telegram_chat_id: "$TELEGRAM_CHAT_ID"
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: Fulao2.xcworkspace
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: Fulao2 TF01
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: app-store
