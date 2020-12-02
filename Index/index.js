@@ -50,3 +50,33 @@ document.getElementById('copyBtn').onclick = function () {
     document.execCommand('copy');
     document.body.removeChild(el);
 }
+
+
+document.getElementById('recoverBtn').addEventListener('click', function () {
+    console.log(111111);
+    var request = new XMLHttpRequest();
+    request.open("GET", window.location.href + "ymlrecover", true);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText)
+                document.getElementById('result').textContent = request.responseText;
+        }
+    };
+
+    request.send();
+})
+// document.getElementById('recoverBtn').onclick = function () {
+//     console.log(111111);
+//     var request = new XMLHttpRequest();
+//     request.open("GET", window.location.href + "ymlrecover", true);
+//     request.onreadystatechange = function () {
+//         if (request.readyState == 4 && request.status == 200) {
+//             console.log(request.responseText)
+//                 document.getElementById('result').textContent = request.responseText;
+//         }
+//     };
+
+//     request.send(
+//         JSON.stringify(bodyObject)
+//     );
+// }

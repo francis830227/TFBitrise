@@ -23,6 +23,19 @@ app.get('/index.js', function(req, res) {
     res.sendFile(path.join(__dirname + '/Index/index.js'));
 });
 
+app.get('/ymlrecover', function(req, res) {
+    try {
+        var fileContents = fs.readFileSync(
+            './yml/Fulao2-TF-recover.yml',
+            'utf8'
+        );
+        var data = yaml.safeLoad(fileContents);
+        res.send(data);
+    } catch(f) {
+        console.log(f);
+    }
+});
+
 app.post('/yml', function(req, res) {
 
     console.log(req.body);
